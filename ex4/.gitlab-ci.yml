@@ -1,0 +1,26 @@
+# fourth example for gitlab-ci
+# By default jobs are assigned to "test" stage.
+# This means if we don't mention any stage, gitlab takes it as "test"
+# The below 2 jobs belong to same stage.
+# First the say_hello job was executed.
+# Second the say_bye job was executed.
+# But the say_bye job was displayed above the say_hello job in gitlab GUI.
+# The sequence of jobs of same stage will decide which job will be executed first. This is tested in fifth example.
+# Below points are being written after executing pipeline of ex5
+# Both jobs of same stage ran in parallel.
+# It depends on the job tasks that which job gets completed first.
+# Regarding how it gets displayed in gitlab GUI, it may depend on job names. They are arranged alphabetically.
+# The display sequence of jobs didn't change even if we changed their sequence in .gitlab-ci.yml file.
+# The say_bye job gets displayed first as "b" comes prior to "h".
+
+# first job
+say_hello:
+  script:
+    - echo "Hello Inderpal Singh."
+    - echo "This is the beginning."
+
+# second job
+say_bye:
+  script:
+    - echo "Bye Inderpal Singh."
+    - echo "This is the end."

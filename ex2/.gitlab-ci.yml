@@ -1,0 +1,34 @@
+# This is second example for our .gitlab-ci.yml file practice.
+# Here, we have defined a single job which will preform multiple tasks.
+# From here we came to know that on our runner gitlab/gitlab-runner-helper:x86_64-a8a019e0 image is downloaded.
+# This image is run as a container (maybe) in priveleged mode (need to investigate). But we cannot log in to this container interactively.
+# Also this container remains alive only for the period of a single job. It is stopped as the job completes.
+# The job stops the moment when the exit code !=0 of any of the tasks in it, that is if any task fails.
+# The tasks after failed task/command are not executed and job, pipeline, commit is marked as failed.
+# Inside this container the docker:latest image is pulled and run as a container (docker in docker).
+# But then why docker:latest image is visible on runner using `docker images` command.
+# Our tasks/commands are executed one by one inside this container spinned fomr docker:latest image.
+# We need to find why our tasks are executed in container from docker:latest image.
+# By default gitlab runner is configured to execute jobs using which docker image?
+# So, it becomes necessary that our commands/tasks in jobs are available in docker:latest image.
+# So, our job dependencies are required in the image which our runner will use to execute jobs.
+# This was verified in ex3.
+# If my current project runners are configured to use docker:latest image to run job tasks.
+# Then docker:latest image is made from alpine linux image.
+# We included `cat /etc/alpine-release` and `cat /etc/os-release` commands in our job which were successfully executed.
+# So, this confirms that the docker:latest image was used to run job tasks.
+# Further the job failed, when I included `which curl` command as alpine linux does not come with curl command by default.
+# The command `curl google.com` after `which curl` was not executed as it failed.
+# Further, this image toexecute our job tasks can be changed by mentioning `image:` parameter in .gitlab-ci.yml.
+# This image can be set at global level which will be used for all jobs.
+# Or this image can be individually specified for each job (if each job uses a different image).
+
+
+say_hello:
+  script:
+    - echo "Hello Inderpal Singh."
+    - echo "Hope you are doing well :)"
+    - uname -a
+    - hostname -f
+    - hostname -i
+    - cat /etc/hosts

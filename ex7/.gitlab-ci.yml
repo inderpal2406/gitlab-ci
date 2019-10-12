@@ -1,0 +1,41 @@
+# Seventh example
+# This is to depict different stage jobs like in example six.
+# But here 3 stages will be defined: build, test and deploy.
+# In test stage 3 jobs will be defined.
+# The purpose is to check if all 3 jobs in test stage run in parallel or sequence.
+# The jobs run according to the sequence of the stages defined, irrespective of the sequence of the jobs.
+
+stages:
+  - build
+  - test
+  - deploy
+
+build_code:
+  stage: build
+  script:
+    - echo "Code is built here."
+    - echo "Docker image is built here."
+
+test_1:
+  stage: test
+  script:
+    - echo "First series of test."
+    - echo "First series of test."
+
+test_2:
+  stage: test
+  script:
+    - echo "Second series of test."
+    - echo "Second series of test."
+
+test_3:
+  stage: test
+  script:
+    - echo "Third series of test."
+    - echo "Third series of test."
+
+deploy_code:
+  stage: deploy
+  script:
+    - echo "Code will be deployed here."
+    - echo "Container will be started from image here."

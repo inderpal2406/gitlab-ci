@@ -1,0 +1,11 @@
+# this is third example to practise .gitlab-ci.yml
+# A description for this example is already added in ex2
+
+say_hello:
+  script:
+    - echo "Hello Inderpal Singh."
+    - uname -a
+    - cat /etc/alpine-release
+    - cat /etc/os-release
+    - which curl
+    - curl google.com

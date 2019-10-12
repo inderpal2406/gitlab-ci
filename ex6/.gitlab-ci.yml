@@ -1,0 +1,32 @@
+# Sixth example
+# To demonstrate different stage jobs
+
+stages:
+  - build
+  - test
+  - deploy
+  - clean
+
+build_code:
+  stage: build
+  script:
+    - echo "The code will be built here."
+    - echo "Or the docker image will be built here."
+
+test_code:
+  stage: test
+  script:
+    - echo "The code will be tested here."
+    - echo "The docker image will be tested here."
+
+deploy_code:
+  stage: deploy
+  script:
+    - echo "The code will be deployed here."
+    - echo "The docker image will be deployed here."
+
+cleanup:
+  stage: clean
+  script:
+    - echo "The deployed code will be cleaned up."
+    - echo "The container will be stopped and removed."

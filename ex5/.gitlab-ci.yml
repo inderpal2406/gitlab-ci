@@ -1,0 +1,13 @@
+# Fifth example for gitlab-ci
+# changing sequence of say_hello and say_bye jobs in fourth example
+
+# first job
+say_bye:
+  script:
+    - echo "Bye Inderpal Singh."
+    - echo "This is the end."
+
+say_hello:
+  script:
+    - echo "Hi Inderpal Singh."
+    - echo "This is the beginning."

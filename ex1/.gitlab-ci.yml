@@ -1,0 +1,9 @@
+# This is first example to practise .gitlab-ci.yml file
+# In this example we define one single job which is as below.
+# Note: A gitlab-ci.yml file is considered as non-valid, it it doesn't contain any job in it.
+# Note: if .gitlab-ci.yml file is not present in root directory, then gitlab-ci doesn't trigger any pipeline for it.
+# Not even the auuto-devops pipeline.
+
+say_hello:
+  script:
+    - echo "Hello Inderpal Singh."
