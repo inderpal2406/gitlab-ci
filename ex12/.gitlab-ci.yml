@@ -1,0 +1,29 @@
+# example 12
+# This is to demonstrate use of only keyword with reference to branches and tags.
+
+all_branch_job:
+  script:
+    - echo "This job will be triggered on all branches."
+  only:
+    - branches
+    # This job will be triggered for all branches.
+    # When we specify branches, it means all branches.
+
+master_job:
+  script:
+    - echo "This job will be triggerd only on master branch."
+  only:
+    - master
+
+all_tag_job:
+  script:
+    - echo "This job will be triggered on all tag."
+  only:
+    - tags
+    # This job will be triggered for all tags.
+
+v0.0.2_tag_job:
+  script:
+    - echo "This job will be triggered only for v0.0.2 tag."
+  only:
+    - v0.0.2

@@ -1,0 +1,41 @@
+# example 11
+# In this example we'll have 4 jobs
+# These 4 jobs will be divided in 2 stages.
+# The 2 stages will be build and test.
+# The build stage will have 1 job limited to master and feature each. And one more job which is not limited.
+# 4th job will be in test stage. This job won't be limited.
+# 2 jobs won't be limited.
+# So, 3 jobs will be triggered in total when we push to any of the branches from master and feature.
+# We need to verify above point.
+
+stages:
+  - build
+  - test
+
+master_job:
+  stage: build
+  script:
+    - echo "This is master build job."
+    - echo "This job is limited to master branch."
+  only:
+    - master
+
+feature_job:
+  stage: build
+  script:
+    - echo "This is feature build job."
+    - echo "This job is limited to feature branch."
+  only:
+    - feature
+
+build_job:
+  stage: build
+  script:
+    - echo "This is build jobs."
+    - echo "This job is not limited."
+
+test_job:
+  stage: test
+  script:
+    - echo "This is test job."
+    - echo "This job is not limited."

@@ -1,0 +1,24 @@
+# ex 18
+# This is to test manual job
+
+stages:
+  - build
+  - test
+
+pass_build_job:
+  stage: build
+  script:
+    - echo "This job will pass."
+
+fail_build_job:
+  stage: build
+  script:
+    - echo "This job will fail."
+
+test_job:
+  stage: test
+  script:
+    - echo "This is a manual job."
+  when: manual
+
+# So, we can trigger manual jobs only if jobs in prior stages succeeded.

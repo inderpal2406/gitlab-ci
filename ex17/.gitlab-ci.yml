@@ -1,0 +1,32 @@
+# ex 14
+# fail-safe job
+# We'll check gitlab response on failure of jobs.
+# We'll check if a particular job fails in a stage, what will happen to other jobs in next stage.
+# We'll define 2 stages: build and test
+# build stage will be assigned 2 jobs. One amongst those jobs will fail and the other will pass.
+# test stage job will be set to manual and will pass.
+# The test stage jobs will be skipped and won't be executed as build stage job fails
+# But we need to check if gitlab allows to trigger manual jobs in stages after failed job's stage.
+
+stages:
+  - build
+  - test
+
+pass_build_job:
+  stage: build
+  script:
+    - echo "This job will pass."
+
+fail_build_job:
+  stage: build
+  script:
+    - echo "This job will fail."
+    - exit 1
+
+test_job:
+  stage: test
+  script:
+    - echo "This is a manual job."
+  when: manual
+
+# gitlab didn't allow to trigger manual jobs in stage after failed job's stage.

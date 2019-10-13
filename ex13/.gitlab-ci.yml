@@ -1,0 +1,16 @@
+# example 13
+# This is to demonstrate use of except and only keywords.
+
+all_branch_job:
+  script:
+    - echo "This will run on all branches."
+  only:
+    - branches
+
+except_master_job:
+  script:
+    - echo "This will run on all branches except master."
+  only:
+    - branches
+  except:
+    - master

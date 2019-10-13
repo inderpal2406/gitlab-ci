@@ -1,0 +1,33 @@
+# ex 14
+# fail-safe job
+# We'll check gitlab response on failure of jobs.
+# We'll check if a particular job fails in a stage, what will happen to other jobs in next stage.
+# We'll define 2 stages: build and test
+# build stage will be assigned 2 jobs. One amongst those jobs will fail and the other will pass.
+# test stage job will pass.
+# We'll check if pipeline proceeds to test stage jobs.
+
+stages:
+  - build
+  - test
+
+pass_build_job:
+  stage: build
+  script:
+    - echo "This job will pass."
+    - echo "This job is in build stage."
+
+fail_build_job:
+  stage: build
+  script:
+    - echo "This job will fail."
+    - echo "This job is in build stage."
+    - exit 1
+
+test_job:
+  stage: test
+  script:
+    - echo "This job will pass."
+    - echo "This job is in test stage."
+
+# so, the failed job didn't allow the pipeline to proceed to next stage job.

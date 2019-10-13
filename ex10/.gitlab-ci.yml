@@ -1,0 +1,24 @@
+# example 10
+# In this example we'll learn use of `only` keyword.
+# The plan is to have 2 git branches `master` and `feature`
+# In feature branch `.gitlab-ci.yml` file will have a job with `only` specifying `master`.
+# We'll push to feature remote branch and check if pipeline gets triggered.
+# In master, we'll have a job with `only` specifying `feature`.
+# We'll push to master remote branch and check if pipeline gets triggered.
+# Then we'll merge `feature` branch into master.
+# Now master `.gitlab-ci.yml` will have 2 jobs.
+# One with `only` specifying `master` and other `only` specifying `feature`.
+# We'll push to remote master and the job with `only` specifying `master` should get triggered.
+# Then we'll push to remote feature and the job with `only` specifying `feature` should get triggered.
+
+feature_job:
+  script:
+    - echo "This job will be triggered only on feature branch."
+  only:
+    - master
+
+master_job:
+  script:
+    - echo "This job will be triggered only on master job."
+  only:
+    - master

@@ -1,0 +1,23 @@
+# ex 14
+# fail-safe job
+# We'll check gitlab response on failure of jobs.
+# We'll check if a particular job fails in a stage, what will happen to other jobs in same stage.
+
+job_before_fail:
+  script:
+    - echo "This job will pass."
+    - echo "This job is before fail job."
+
+fail_job:
+  script:
+    - echo "This job will fail."
+    - exit 1 # to fail the job
+
+job_after_fail:
+  script:
+    - echo "This job will pass."
+    - echo "This job is after fail job."
+
+# so, all jobs were triggered as they are in same stage.
+# fail_job failed and no effect was seen on other jobs.
+# I guess that a failed job will only produce effects on stage jobs which are after its stage.
