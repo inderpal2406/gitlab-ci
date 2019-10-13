@@ -19,10 +19,17 @@ Currently examples are being practised from this [link](https://medium.com/faun/
 * Gitlab assigns jobs to `test` stage by default if we don't define a `stages` in `.gitlab-ci.yml` file. This is when we don't specify `stage` in our job as well. If we define a `stage` in our job, but that `stage` is not defined in `stages`, then we'll get an error.
 * If you have defined a stage called “test”, and define a job without stage added in it, Then the job will run under test stage since the default stage is test.
 * If you haven’t defined the test stage and create a job without stage defined in it, Then Gitlab pipeline will throw an error like yaml invalid and will ask you to specify the stage for the job as shown below.
-*
+* `only` will accept regular expressions. If your commit matches with regular expression, pipeline gets activated and jobs will executed as per configuration.
+* `only` and `except` are inclusive. If both only and except are defined in a job specification, the ref is filtered by only and except.
+* `only` and `except` allow the use of regular expressions (using Ruby regexp syntax).
+* `only` and `except` allow to specify a repository path to filter jobs for forks.
+* The default value for `when` attribute is `on-success`
+* The default value for `allow_failure` attribute is `false`. That is the reason if any error occurs in pipeline remaining jobs will be skipped.
 
 
 ## Keywords used in `.gitlab-ci.yml`  file.
 * script
 * stages
 * stage
+* only
+* except
