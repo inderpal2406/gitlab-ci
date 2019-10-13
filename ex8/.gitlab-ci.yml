@@ -1,0 +1,7 @@
+# example 8
+# This is to test if gitlab gives "invaid yml" error if we don't pass any job into it.
+
+stages:
+  - build
+  - test
+  - deploy

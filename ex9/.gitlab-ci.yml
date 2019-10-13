@@ -1,0 +1,19 @@
+# example 9
+# We verified that gitlab gives `invalid yaml` error if no visible jobs is defined.
+# In this example, we'll try to define a single hidden job and check if gitlab fails.
+
+stages:
+  - build
+  - test
+  - deploy
+
+.hidden_build:
+  stage: build
+  script:
+    - echo "This is hidden job."
+    - echo "Hidden job is defined with a period in front of its name. This is identical to hidden files in Linux."
+
+
+# I didn't run any pipeline for this.
+# Instead I checked it in CI Lint option.
+# And it gave the syntax error of "jobs config should contain at least one visible job"
