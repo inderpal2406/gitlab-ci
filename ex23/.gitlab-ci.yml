@@ -1,0 +1,47 @@
+# ex 23
+# when keyword job
+# we'll have 4 jobs, each will depict one use case of when for on_success, on_failure, manual, always
+# There will be additional jobs to depict such cases.
+
+stages:
+  - build
+  - test
+  - deploy
+  - clean
+  - after_clean
+
+build_job:
+  stage: build
+  script:
+    - echo "Build stage job."
+
+test_job:
+  stage: test
+  when: on_success
+  script:
+    - echo "Test stage job which will fail."
+    - exit 1
+
+deploy_job:
+  stage: deploy
+  when: on_failure
+  script:
+    - echo "Deploy stage job."\
+    - echo "This job will be made to fail to check next stage's job using always."
+    - exit 1
+
+always_job:
+  stage: clean
+  when: always
+  script:
+    - echo "Clean stage job."
+    - echo "This job will always run irrespective of previous stage."
+    - echo "This job will pass inorder to trigger next manual job."
+
+clean_job:
+  stage: after_clean
+  when: manual
+  script:
+    - echo "This is manual job."
+
+# The manual job in last stage was skipped, though the job in its immediate previous stage succeeded. So, this means, if a job fails in any of the stages, the manual jobs in after stages will be skipped. This can be undone only by including manual jobs in same stage as failing jobs or prior stage to failing job or configure allow_failure: true for the failing jobs.

@@ -1,0 +1,38 @@
+# ex 20
+# fail-safe job
+# We'll define 4 stages - build, test, deploy, clean
+# Here, test stage job will be made to fail
+# But we'll add "allow_failure" as true in test_job.
+# The pipeline will proceed even if test_job fails.
+
+stages:
+  - build
+  - test
+  - deploy
+  - clean
+
+build_job:
+  stage: build
+  script:
+    - echo "Build stage job."
+
+test_job:
+  stage: test
+  allow_failure: true
+  script:
+    - echo "Test stage job which will fail."
+    - exit 1
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploy stage job."
+
+clean_job:
+  stage: clean
+  script:
+    - echo "Clean stage job."
+
+
+# So, the 2nd job failed and the pipeline didn't proceed further.
+# Gitlab provides "Play all manual" jobs option with a play icon right to the stage name using which we can play all manual jobs.

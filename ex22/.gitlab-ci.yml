@@ -1,0 +1,38 @@
+# ex 22
+# retry job
+# We'll define 4 stages - build, test, deploy, clean
+# Here, test stage job will be made to fail
+# But we'll add "allow_failure" as true in test_job.
+# The pipeline will proceed even if test_job fails.
+# But we'll add retry attribute as 1 in test_job
+# So, gitlab should retry it once on failure and then proceed (as it is also allow_failure: true)
+
+stages:
+  - build
+  - test
+  - deploy
+  - clean
+
+build_job:
+  stage: build
+  script:
+    - echo "Build stage job."
+
+test_job:
+  stage: test
+  retry: 1
+  allow_failure: true
+  script:
+    - echo "Test stage job which will fail."
+    - exit 1
+
+deploy_job:
+  stage: deploy
+  when: manual
+  script:
+    - echo "Deploy stage job."
+
+clean_job:
+  stage: clean
+  script:
+    - echo "Clean stage job."

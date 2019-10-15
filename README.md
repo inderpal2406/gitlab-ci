@@ -27,6 +27,26 @@ For official documentation on `.gitlab-ci.yml`, check this [link](https://docs.g
 * `only` and `except` allow to specify a repository path to filter jobs for forks.
 * The default value for `when` attribute is `on-success`
 * The default value for `allow_failure` attribute is `false`. That is the reason if any error occurs in pipeline remaining jobs will be skipped.
+* The default value for `allow_failure` attribute is `false`. That is the reason if any error occurs in pipeline remaining jobs will be skipped.
+* If you want to retry the job in case of failure again for a certain number of times can be configured using `retry` in the job configuration.
+* If `retry` is set to 2, and a job succeeds in a second run (first retry), it won’t be retried again.
+* `retry` value has to be a positive integer, equal to or larger than 0, but lower or equal to 2 (two retries maximum, three runs in total).
+* Using `when` keyword, we can control when do we want the job to run. `when` can take the below stated values,
+  * `on_success` - execute job only when all jobs from prior stages succeed (or are considered succeeding because they are marked allow_failure). This is the default.
+  * `on_failure` - execute job only when at least one job from prior stages fails. `on_failure` job will be skipped if none of the jobs in prior stages fail.
+  * `always` - execute job regardless of the status of jobs from prior stages.
+  * `manual` - execute job manually (added in GitLab 8.10). Read about manual actions below.
+* The manual job will be skipped, even if the job in its immediate previous stage succeedes. So, this means, if a job fails in any of the stages, the manual jobs in after stages will be skipped. This can be undone only by including manual jobs in same stage as failing jobs or prior stage to failing job or configure allow_failure: true for the failing jobs.
+* GitLab allows definition of variables.
+* There are 2 types of variables,
+  * Global variables
+  * Job specific variables
+* Both types of variables can be defined by using a tag called `variables` .
+* If you define variables in Job configuration, variables under it become job specific variables and will override the global variables with the same name are defined.
+* If you define variables as root tag, Values under it will become global variables. These can be accessed in any job under the pipeline.
+* Pipelines with `allow_failure: true` jobs are marked as passed in `yellow` color, provided no other job has failed.
+* If any job fails except the `allow_failure: true` jobs. then the pipeline is marked as `failed` in `red` color.
+* If all jobs pass, then the pipeline is marked as `passed` in `green` color.
 
 
 ## Keywords used in `.gitlab-ci.yml`  file.

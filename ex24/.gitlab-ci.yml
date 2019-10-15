@@ -1,0 +1,28 @@
+# ex 24
+# To understand global and job specific variables.
+
+
+# Defining root variables
+variables:
+  NAME: "Inderpal Singh"
+  PLACE: "Mumbai"
+
+stages:
+  - build
+  - test
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - echo "Build stage job."
+    - echo "Value of root variable \$NAME is $NAME."
+
+test_job:
+  stage: test
+  variables:
+    PLACE: "Pune"
+    COMPANY: "Capgemini"
+  script:
+    - echo "Overridden value of \$PLACE is $PLACE."
+    - echo "Value of job specific variable \$COMPANY is $COMPANY."
