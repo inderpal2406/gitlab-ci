@@ -3,6 +3,8 @@ This repository is to practise .gitlab-ci.yml file examples.
 
 Currently examples are being practised from this [link](https://medium.com/faun/ci-cd-essentials-from-scratch-with-gitlab-61502acf318e)
 
+For official documentation on `.gitlab-ci.yml`, check this [link](https://docs.gitlab.com/ee/ci/yaml/README.html?source=post_page-----61502acf318e----------------------)
+
 ## Key points to remember while writing `.gitlab-ci.yml` file.
 * `.gitlab-ci.yml` file must contain at least one job.  If there are no jobs defined in it when we push the code to Gitlab, Gitlab runner will throw an error saying `invalid yaml configuration`. the job running fails. This is verified in ex7,8,9. Even if we define a single hidden job, it'll fail. So, a visible job is mandatory.
 * You can see all the pipelines of a project under the Pipelines section of Gitlab repository.
